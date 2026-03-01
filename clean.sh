@@ -2,5 +2,5 @@
 
 rm -rf out/* || true
 rm -rf jars/* || true
-rm -rf src/LICENSE
-rm -rf src/META-INF
+rm -rf src/LICENSE || true
+rm -rf src/META-INF || true
