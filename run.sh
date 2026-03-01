@@ -1,17 +1,22 @@
 #!/bin/bash
 set -e
+clear
+./clean.sh
+
+MAIN_SOURCE="app/msv/main/Main.java"
+MAIN_CLASS="app.msv.main.Main"
 
 cd src
-javac -d ../out/ -cp "." main/Main.java
+jar -xf ../libs/*.jar
+javac -d ../out/ -cp "." "$MAIN_SOURCE"
+mv com/ ../out/
 
 cd ..
-
 jar -cfe jars/App.jar \
-	main.Main \
+	"$MAIN_CLASS" \
 	-C out . \
-	-C resources . \
-	-C src .
+	-C resources .
 
 java -jar jars/App.jar $(cat datapath.dat) janekv
 
-bat response.json
+"$(cat viewer.txt)" response.json
