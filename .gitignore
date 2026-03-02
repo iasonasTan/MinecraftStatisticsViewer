@@ -1,6 +1,8 @@
 datapath.dat
 viewer.txt
 response.json
+username.dat
+output.json
 out/*
 jars/*
 src/LICENSE

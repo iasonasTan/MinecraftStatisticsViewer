@@ -7,7 +7,7 @@ clear
 ./build.sh
 
 # Run generated JAR
-java -jar jars/App.jar $(cat datapath.dat) ADStuff
+java -jar jars/App.jar $(cat datapath.dat) $(cat username.dat)
 
 # Print Output
-"$(cat viewer.txt)" response.json
+echo $(cat output.json)
