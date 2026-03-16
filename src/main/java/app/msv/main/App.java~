@@ -1,0 +1,70 @@
+package app.msv.main;
+
+import app.msv.controller.*;
+import app.msv.main.Context;
+import java.util.*;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import lib.io.Configuration;
+
+public class App extends Application implements Context {
+
+    private final String STYLE = "/view/style.css";
+
+    private final Map<String, Context.BroadcastReceiver> mReceivers =
+        new HashMap<>();
+
+    @Override
+    public void start(final Stage stage) {
+        addBroadcastReceiver("pageman", message -> {
+            if (message instanceof String str) {
+                showPage(stage, str);
+            }
+        });
+
+        sendBroadcast(
+            "pageman",
+            Configuration.loadProperties("settings.properties").getString(
+                    "username"
+                ) ==
+                null
+                ? "login"
+                : "home"
+        );
+
+        stage.setTitle("Minecraft Statistics Viewer");
+        stage.show();
+    }
+
+    public void showPage(Stage stage, String name) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/app/msv/view/" + name + ".fxml")
+            );
+            loader.setController(
+                name.equals("login")
+                    ? new LoginController(this)
+                    : new HomeController(this)
+            );
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 400, 300);
+            scene.getStylesheets().add(STYLE);
+            stage.setScene(scene);
+        } catch (Exception e) {
+            IO.println(e);
+        }
+    }
+
+    @Override
+    public void sendBroadcast(String listenerID, Object message) {
+        mReceivers.get(listenerID).onReceive(message);
+    }
+
+    @Override
+    public void addBroadcastReceiver(String id, BroadcastReceiver receiver) {
+        mReceivers.put(id, receiver);
+    }
+}

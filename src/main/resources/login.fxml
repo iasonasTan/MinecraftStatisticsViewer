@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<VBox
+    spacing="10"
+    alignment="CENTER"
+    fillWidth="false"
+    xmlns:fx="http://javafx.com/fxml"
+>
+<!-- fx:controller="app.msv.controller.LoginController" -->
+    <Label text="Login Page" styleClass="title" />
+    <TextField
+        fx:id="usernameField"
+        promptText="Username"
+        styleClass="component"
+    />
+    <Button text="Login" onAction="#handleLogin" styleClass="component" />
+
+</VBox>

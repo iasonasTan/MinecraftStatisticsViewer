@@ -1,0 +1,23 @@
+plugins {
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+repositories {
+  mavenCentral();
+}
+
+javafx {
+  version = 25
+  modules = ['javafx.controls', 'javafx.fxml']
+}
+
+application {
+  mainClass = 'app.msv.main.Main'
+  applicationDefaultJvmArgs = ["--enable-native-access=ALL-UNNAMED"]
+}
+
+dependencies {
+  implementation 'com.owlike:genson:1.6'
+  implementation files('libs/Lib-v1.2.0.jar')
+}

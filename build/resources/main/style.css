@@ -1,0 +1,12 @@
+.component {
+    -fx-pref-width: 100px;
+    -fx-pref-height: 35px;
+}
+
+.title {
+    -fx-font-size: 22px;
+}
+
+* {
+    -fx-font-weight: bolder;
+}
