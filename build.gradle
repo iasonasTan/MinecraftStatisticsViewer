@@ -14,7 +14,7 @@ javafx {
 
 application {
   mainClass = 'app.msv.main.Main'
-  applicationDefaultJvmArgs = ["--enable-native-access=ALL-UNNAMED"]
+  applicationDefaultJvmArgs = ["--enable-native-access=javafx.graphics", "--enable-native-access=ALL-UNNAMED"]
 }
 
 dependencies {

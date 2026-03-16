@@ -16,8 +16,7 @@ public final class NetworkHandler {
         mListener = listener;
     }
 
-    public synchronized void requestFor(final String userName)
-        throws Exception {
+    public synchronized void requestFor(final String userName) throws Exception {
         final URI mojangURI = URI.create(
             "https://api.mojang.com/users/profiles/minecraft/" + userName
         );
@@ -64,7 +63,6 @@ public final class NetworkHandler {
     }
 
     public static class Data {
-
         public String id;
         public String name;
 
@@ -97,7 +95,6 @@ public final class NetworkHandler {
     }
 
     public static final class UserData {
-
         public String uuid;
         public String name;
         public String region;

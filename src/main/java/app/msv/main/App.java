@@ -11,11 +11,7 @@ import javafx.stage.Stage;
 import lib.io.Configuration;
 
 public class App extends Application implements Context {
-
-    private final String STYLE = "/style.css";
-
-    private final Map<String, Context.BroadcastReceiver> mReceivers =
-        new HashMap<>();
+    private final Map<String, Context.BroadcastReceiver> mReceivers = new HashMap<>();
 
     @Override
     public void start(final Stage stage) {
@@ -25,15 +21,10 @@ public class App extends Application implements Context {
             }
         });
 
-        sendBroadcast(
-            "pageman",
-            Configuration.loadProperties("settings.properties").getString(
-                    "username"
-                ) ==
-                null
+        String message = Configuration.loadProperties("settings.properties").getString("username") == null
                 ? "login"
-                : "home"
-        );
+                : "home";
+        sendBroadcast("pageman", message);
 
         stage.setTitle("Minecraft Statistics Viewer");
         stage.show();
@@ -42,16 +33,14 @@ public class App extends Application implements Context {
     public void showPage(Stage stage, String name) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/" + name + ".fxml")
-            );
+                getClass().getResource("/" + name + ".fxml"));
             loader.setController(
                 name.equals("login")
                     ? new LoginController(this)
-                    : new HomeController(this)
-            );
+                    : new HomeController(this));
             Parent root = loader.load();
             Scene scene = new Scene(root, 400, 300);
-            scene.getStylesheets().add(STYLE);
+            scene.getStylesheets().add("/style.css");
             stage.setScene(scene);
         } catch (Exception e) {
             throw new RuntimeException(e);

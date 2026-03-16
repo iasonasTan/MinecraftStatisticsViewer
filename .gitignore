@@ -7,3 +7,6 @@ out/*
 jars/*
 src/LICENSE
 src/META-INF/
+build/*
+
+build
